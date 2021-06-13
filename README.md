@@ -1,7 +1,7 @@
 # PyTorch SimCLR: A Simple Framework for Contrastive Learning of Visual Representations
 [![DOI](https://zenodo.org/badge/241184407.svg)](https://zenodo.org/badge/latestdoi/241184407)
 
-
+Original Repo: https://github.com/sthalles/SimCLR
 ### Blog post with full documentation: [Exploring SimCLR: A Simple Framework for Contrastive Learning of Visual Representations](https://sthalles.github.io/simple-self-supervised-learning/)
 
 ![Image of SimCLR Arch](https://sthalles.github.io/assets/contrastive-self-supervised/cover.png)
