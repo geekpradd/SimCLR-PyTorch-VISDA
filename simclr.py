@@ -62,8 +62,8 @@ class SimCLR(object):
         save_config_file(self.writer.log_dir, self.args)
 
         n_iter = 0
-        logging.info(f"Start SimCLR training for {self.args.epochs} epochs.")
-        logging.info(f"Training with gpu: {self.args.disable_cuda}.")
+        logging.info("Start SimCLR training for {0} epochs.".format(self.args.epochs))
+        logging.info("Training with gpu: {0}.".format({self.args.disable_cuda}))
 
         for epoch_counter in range(self.args.epochs):
             for images, _ in tqdm(train_loader):
@@ -95,7 +95,7 @@ class SimCLR(object):
             # warmup for the first 10 epochs
             if epoch_counter >= 10:
                 self.scheduler.step()
-            logging.debug(f"Epoch: {epoch_counter}\tLoss: {loss}\tTop1 accuracy: {top1[0]}")
+            logging.debug("Epoch: {0} \tLoss: {1}\tTop1 accuracy: {2}".format(epoch_counter, loss, top1[0]))
 
         logging.info("Training has finished.")
         # save model checkpoints
@@ -106,4 +106,4 @@ class SimCLR(object):
             'state_dict': self.model.state_dict(),
             'optimizer': self.optimizer.state_dict(),
         }, is_best=False, filename=os.path.join(self.writer.log_dir, checkpoint_name))
-        logging.info(f"Model checkpoint and metadata has been saved at {self.writer.log_dir}.")
+        logging.info("Model checkpoint and metadata has been saved at {0}.".format({self.writer.log_dir}))
