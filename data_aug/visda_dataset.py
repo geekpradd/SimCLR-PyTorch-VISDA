@@ -2,6 +2,7 @@ import os
 import torch
 import pandas as pd
 from skimage import io, transform
+from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
@@ -59,6 +60,7 @@ class VisdaDataset(Dataset):
 
         image = io.imread(image_path)
 
+        image = (Image.fromarray(image))
         # print (image[215, 384])
         if self.transform:
             image = self.transform(image)

@@ -63,10 +63,11 @@ class SimCLR(object):
 
         n_iter = 0
         logging.info("Start SimCLR training for {0} epochs.".format(self.args.epochs))
-        logging.info("Training with gpu: {0}.".format({self.args.disable_cuda}))
 
         for epoch_counter in range(self.args.epochs):
             for images, _ in tqdm(train_loader):
+                # print(len(images))
+                # print(images[0].size())
                 images = torch.cat(images, dim=0)
 
                 images = images.to(self.args.device)
@@ -96,6 +97,14 @@ class SimCLR(object):
             if epoch_counter >= 10:
                 self.scheduler.step()
             logging.debug("Epoch: {0} \tLoss: {1}\tTop1 accuracy: {2}".format(epoch_counter, loss, top1[0]))
+            checkpoint_name = 'checkpoint_epoch{:04d}.pth.tar'.format(epoch_counter)
+            save_checkpoint({
+                'epoch': self.args.epochs,
+                'arch': self.args.arch,
+                'state_dict': self.model.state_dict(),
+                'optimizer': self.optimizer.state_dict(),
+            }, is_best=False, filename=os.path.join(self.writer.log_dir, checkpoint_name))
+            logging.info("Model checkpoint for epoch and metadata has been saved at {0}.".format(epoch_counter, {self.writer.log_dir}))
 
         logging.info("Training has finished.")
         # save model checkpoints
