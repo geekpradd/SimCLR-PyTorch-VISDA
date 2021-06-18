@@ -109,7 +109,7 @@ class Visda(VisionDataset):
         if self.train:
             self.root_dir = os.path.join(self.root_dir, "train")
         else:
-            self.root_dir = os.path.join(self.root_dir, "test")
+            self.root_dir = os.path.join(self.root_dir, "validation")
 
         self.categories = (os.listdir(self.root_dir))
         self.categories.remove("image_list.txt")
